@@ -17,6 +17,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
+        "test:watch": "yarn test --watch",
         "eject": "react-scripts eject",
         "lint": "eslint src --max-warnings=0",
         "typecheck": "tsc --project tsconfig.json --noEmit",

@@ -1,10 +1,15 @@
-function App() {
+import Routes from 'routes'
+import { ThemeProvider } from 'styled-components'
+
+import { GlobalStyles } from 'styles/global'
+import theme from 'styles/theme'
+
+const App = () => {
     return (
-        <div>
-            <header>
-                <h1>Teste Frontend - 2SOW</h1>
-            </header>
-        </div>
+        <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <Routes />
+        </ThemeProvider>
     )
 }
 
