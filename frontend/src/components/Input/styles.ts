@@ -4,11 +4,17 @@ type WrapperProps = {
     error: boolean
 }
 
-export const Label = styled.label``
+export const Label = styled.label`
+    ${({ theme }) => css`
+        font-size: ${theme.font.sizes.large};
+        cursor: pointer;
+    `}
+`
 
 export const InputWrapper = styled.div`
     ${({ theme }) => css`
         display: flex;
+        margin-top: ${theme.spacings.xxsmall};
         border: 1px solid ${theme.colors.lightGrey};
         border-radius: 4px;
         background: ${theme.colors.white};
@@ -28,6 +34,7 @@ export const Input = styled.input`
         outline: none;
         width: 100%;
         color: ${theme.colors.black};
+        font-size: ${theme.font.sizes.medium};
 
         &::placeholder {
             color: ${theme.colors.secondary};
