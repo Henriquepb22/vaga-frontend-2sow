@@ -9,11 +9,11 @@ export const Header = styled.header`
         align-items: center;
         justify-content: space-between;
         padding: 0 1rem;
-        height: 2.2rem;
+        height: 5rem;
         background-color: ${theme.colors.secondary};
 
         ${media.lessThan('medium')`
-            height: 2rem;
+            height: 4rem;
             padding-right: 0;
         `}
     `}
@@ -22,11 +22,11 @@ export const Header = styled.header`
 export const Title = styled.h1`
     ${({ theme }) => css`
         color: ${theme.colors.white};
-        font-size: ${theme.font.sizes.small};
+        font-size: ${theme.font.sizes.xxlarge};
         font-weight: ${theme.font.bold};
 
         ${media.lessThan('medium')`
-            font-size: ${theme.font.sizes.xsmall};
+            font-size: ${theme.font.sizes.xlarge};
         `}
     `}
 `
@@ -39,7 +39,7 @@ export const NavLink = styled(BaseNavLink)`
     ${({ theme }) => css`
         display: flex;
         align-items: center;
-        font-size: ${theme.font.sizes.xxsmall};
+        font-size: ${theme.font.sizes.large};
         padding: 0.4rem;
         color: ${theme.colors.white};
         transition: opacity 0.3s ease-in;

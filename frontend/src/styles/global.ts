@@ -13,13 +13,14 @@ export const GlobalStyles = createGlobalStyle`
 
 ${({ theme }) => css`
     html {
-        font-size: ${theme.font.sizes.medium};
+        font-size: 62.5%;
     }
 
     body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         background-color: ${theme.colors.mainBg};
+        font-size: ${theme.font.sizes.medium};
     }
 `}
 
