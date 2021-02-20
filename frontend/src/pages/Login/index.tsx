@@ -1,10 +1,16 @@
-import Wrapper from 'components/Wrapper'
+import LoginForm from 'components/LoginForm'
+
+import * as S from './styles'
 
 const Login = () => {
+    const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+    }
+
     return (
-        <Wrapper>
-            <h1> Login </h1>
-        </Wrapper>
+        <S.Container>
+            <LoginForm onSubmit={onSubmit} />
+        </S.Container>
     )
 }
 

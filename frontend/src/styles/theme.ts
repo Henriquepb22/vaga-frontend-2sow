@@ -29,6 +29,7 @@ export default {
         small: '1rem',
         medium: '1.2rem',
         large: '1.6rem',
-        xlarge: '2.4rem'
+        xlarge: '2.4rem',
+        xxlarge: '3.2rem'
     }
 } as const
