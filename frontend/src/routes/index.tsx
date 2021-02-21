@@ -1,23 +1,21 @@
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
-} from 'react-router-dom'
-
+import { useContext } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { AuthContext } from 'contexts/AuthContext'
 import { ROUTES } from 'logic/constants'
-import Wrapper from 'components/Wrapper'
 import Login from 'pages/Login'
 
-const Routes = () => (
-    <Router>
+const Routes = () => {
+    const { authenticated } = useContext(AuthContext)
+
+    return (
         <Switch>
-            <Wrapper>
-                <Route path={ROUTES.LOGIN} component={() => <Login />} />
-                <Redirect from="*" to={ROUTES.LOGIN} />
-            </Wrapper>
+            <Route path={ROUTES.LOGIN} exact>
+                <Login />
+            </Route>
+            {!authenticated && <Redirect to={ROUTES.LOGIN} />}
+            <Redirect from="*" to={ROUTES.LOGIN} />
         </Switch>
-    </Router>
-)
+    )
+}
 
 export default Routes

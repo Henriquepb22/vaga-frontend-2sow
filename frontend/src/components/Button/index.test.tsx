@@ -42,4 +42,12 @@ describe('<Button />', () => {
         ).toBeInTheDocument()
         expect(screen.getByTestId(/icon/i)).toBeInTheDocument()
     })
+
+    it('should disable button on loading', () => {
+        renderWithTheme(<Button isLoading={true}>Login</Button>)
+
+        expect(screen.getByRole('button', { name: /login/i })).toHaveAttribute(
+            'disabled'
+        )
+    })
 })

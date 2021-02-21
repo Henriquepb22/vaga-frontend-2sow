@@ -20,15 +20,7 @@ describe('<Input />', () => {
     })
 
     it('should change its value when typing', async () => {
-        const onInput = jest.fn()
-        renderWithTheme(
-            <Input
-                onInput={onInput}
-                label="Label"
-                labelFor="Label"
-                id="Label"
-            />
-        )
+        renderWithTheme(<Input label="Label" labelFor="Label" id="Label" />)
 
         const input = screen.getByRole('textbox')
         const text = 'new text'
@@ -36,9 +28,7 @@ describe('<Input />', () => {
 
         await waitFor(() => {
             expect(input).toHaveValue(text)
-            expect(onInput).toHaveBeenCalledTimes(text.length)
         })
-        expect(onInput).toHaveBeenCalledWith(text)
     })
 
     it('should render with an icon', () => {

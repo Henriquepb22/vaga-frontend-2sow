@@ -11,6 +11,10 @@ export type UserProps = {
     }
 }
 
+export type UserReturn = UserProps & {
+    id: number
+}
+
 export type UserFilters = {
     page: number
     name?: string

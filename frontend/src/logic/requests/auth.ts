@@ -1,10 +1,10 @@
-import { UserProps } from 'types/users'
+import { UserReturn } from 'types/users'
 import api from 'logic/api'
 
 export const login = async (
     email: string,
     password: string
-): Promise<UserProps[]> => {
+): Promise<UserReturn[]> => {
     const { data } = await api.get('/users', {
         params: {
             email,

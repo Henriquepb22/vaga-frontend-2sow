@@ -1,12 +1,14 @@
 import * as S from './styles'
 
+export type NavLinkProps = {
+    linkTo: string
+    label: string
+    icon?: JSX.Element
+}
+
 export type HeaderProps = {
     title: string
-    links?: {
-        linkTo: string
-        label: string
-        icon?: JSX.Element
-    }[]
+    links?: NavLinkProps[]
 }
 
 const Header = ({ title, links }: HeaderProps) => {

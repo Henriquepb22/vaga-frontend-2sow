@@ -1,4 +1,10 @@
-import Header from 'components/Header'
+import { useContext, useState, useEffect, useCallback } from 'react'
+import Header, { NavLinkProps } from 'components/Header'
+import { Logout } from '@styled-icons/material/Logout'
+import { Group } from '@styled-icons/material/Group'
+import { AuthContext } from 'contexts/AuthContext'
+import { ROUTES } from 'logic/constants'
+
 import * as S from './styles'
 
 type WrapperProps = {
@@ -6,9 +12,34 @@ type WrapperProps = {
 }
 
 const Wrapper = ({ children }: WrapperProps) => {
+    const { authenticated } = useContext(AuthContext)
+    const [navLinks, setNavLinks] = useState<NavLinkProps[]>([])
+
+    const getHeaderLinks = useCallback(() => {
+        const links = [
+            {
+                label: 'Usuários',
+                linkTo: ROUTES.USERS,
+                icon: <Group />
+            },
+            {
+                label: 'Sair',
+                linkTo: ROUTES.LOGOUT,
+                icon: <Logout />
+            }
+        ]
+        setNavLinks(links)
+    }, [])
+
+    useEffect(() => {
+        if (authenticated) {
+            getHeaderLinks()
+        }
+    }, [authenticated, getHeaderLinks])
+
     return (
         <S.Wrapper>
-            <Header title="Cadastro" />
+            <Header title="Cadastro" links={navLinks} />
             {children}
         </S.Wrapper>
     )

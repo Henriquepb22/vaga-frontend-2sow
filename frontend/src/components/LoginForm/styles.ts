@@ -8,9 +8,9 @@ export const LoginBox = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: ${theme.spacings.xxlarge} ${theme.spacings.medium};
+        padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge};
         background-color: ${theme.colors.white};
-        max-width: 50rem;
+        max-width: 55rem;
         margin: 0 auto;
         border-radius: 10px;
     `}
@@ -18,6 +18,7 @@ export const LoginBox = styled.div`
 
 export const LoginText = styled.h2`
     ${({ theme }) => css`
+        margin-top: ${theme.spacings.medium};
         font-size: ${theme.font.sizes.xlarge};
         color: ${theme.colors.secondary};
     `}
@@ -35,7 +36,7 @@ export const LoginInfo = styled.h3`
 export const FormContainer = styled.form`
     ${({ theme }) => css`
         width: 100%;
-        padding: 0 ${theme.spacings.medium};
+        padding: ${theme.spacings.medium};
         display: flex;
         flex-direction: column;
         margin-top: ${theme.spacings.xlarge};

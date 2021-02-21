@@ -40,7 +40,7 @@ export const NavLink = styled(BaseNavLink)`
         display: flex;
         align-items: center;
         font-size: ${theme.font.sizes.large};
-        padding: 0.4rem;
+        padding: ${theme.spacings.xxsmall} ${theme.spacings.large};
         color: ${theme.colors.white};
         transition: opacity 0.3s ease-in;
         font-weight: ${theme.font.light};
@@ -51,8 +51,8 @@ export const NavLink = styled(BaseNavLink)`
         }
 
         > svg {
-            margin-left: 0.3rem;
-            width: 1rem;
+            margin-left: ${theme.spacings.xsmall};
+            width: 2rem;
         }
     `}
 `

@@ -5,6 +5,7 @@ export type ButtonProps = {
     icon?: JSX.Element
     color?: 'primary' | 'secondary'
     size?: 'normal' | 'large'
+    isLoading?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button = ({
@@ -12,9 +13,16 @@ const Button = ({
     icon,
     color = 'primary',
     size = 'normal',
+    isLoading = false,
     ...props
 }: ButtonProps) => (
-    <S.Wrapper color={color} size={size} {...props}>
+    <S.Wrapper
+        color={color}
+        size={size}
+        isLoading={isLoading}
+        disabled={isLoading}
+        {...props}
+    >
         {icon}
         {!!children && <span>{children}</span>}
     </S.Wrapper>
