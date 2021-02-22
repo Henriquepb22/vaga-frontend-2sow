@@ -34,5 +34,12 @@ export default {
         large: '1.6rem',
         xlarge: '2.4rem',
         xxlarge: '3.2rem'
+    },
+    radius: {
+        medium: '0.8rem',
+        large: '1rem'
+    },
+    transition: {
+        fast: '0.3s ease-in'
     }
 } as const

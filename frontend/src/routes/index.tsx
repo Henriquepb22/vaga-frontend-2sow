@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { Switch, Route, Redirect, useRouteMatch } from 'react-router-dom'
 import { AuthContext } from 'contexts/AuthContext'
 import { ROUTES } from 'logic/constants'
+import Logout from 'pages/Logout'
 import Login from 'pages/Login'
 import Users from 'pages/Users'
 
@@ -19,6 +20,9 @@ const Routes = () => {
             {!authenticated && <Redirect to={ROUTES.LOGIN} />}
             <Route path={ROUTES.USERS} exact>
                 <Users />
+            </Route>
+            <Route path={ROUTES.LOGOUT} exact>
+                <Logout />
             </Route>
             <Redirect from="*" to={ROUTES.USERS} />
         </Switch>

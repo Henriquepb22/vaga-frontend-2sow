@@ -42,7 +42,7 @@ export const NavLink = styled(BaseNavLink)`
         font-size: ${theme.font.sizes.large};
         padding: ${theme.spacings.xxsmall} ${theme.spacings.large};
         color: ${theme.colors.white};
-        transition: opacity 0.3s ease-in;
+        transition: opacity ${theme.transition.fast};
         font-weight: ${theme.font.light};
 
         &:hover,
@@ -56,7 +56,8 @@ export const NavLink = styled(BaseNavLink)`
         }
 
         ${media.lessThan('medium')`
-        padding: ${theme.spacings.xsmall};
-    `}
+            padding: ${theme.spacings.xsmall};
+            font-size: 0;
+        `}
     `}
 `

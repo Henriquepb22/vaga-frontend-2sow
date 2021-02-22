@@ -7,6 +7,7 @@ export type AuthContextProps = {
     token: string | null
     authenticated: boolean
     handleLogin: (email: string, password: string) => Promise<void>
+    handleLogout: () => void
 }
 
 type AuthProviderProps = {
@@ -19,10 +20,13 @@ const generateToken = (value: string) => {
     return newToken
 }
 
+const cleanToken = () => localStorage.removeItem('token')
+
 const initialValue: AuthContextProps = {
     token: localStorage.getItem('token'),
     authenticated: !!localStorage.getItem('token'),
-    handleLogin: async () => {}
+    handleLogin: async () => {},
+    handleLogout: () => {}
 }
 
 export const AuthContext = createContext(initialValue)
@@ -50,10 +54,17 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         }
     }
 
+    const handleLogout = () => {
+        setToken(null)
+        setAuthenticated(false)
+        cleanToken()
+    }
+
     const value: AuthContextProps = {
         token,
         authenticated,
-        handleLogin
+        handleLogin,
+        handleLogout
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

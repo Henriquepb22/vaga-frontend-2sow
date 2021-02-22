@@ -34,6 +34,8 @@ const Wrapper = ({ children }: WrapperProps) => {
     useEffect(() => {
         if (authenticated) {
             getHeaderLinks()
+        } else {
+            setNavLinks([])
         }
     }, [authenticated, getHeaderLinks])
 

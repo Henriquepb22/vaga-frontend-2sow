@@ -45,12 +45,12 @@ export const Wrapper = styled.button<WrapperProps>`
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
+        border-radius: ${theme.radius.medium};
         width: 100%;
         border: 0;
         color: ${theme.colors.white};
         font-weight: ${theme.font.bold};
-        transition: box-shadow 0.3s ease-in;
+        transition: box-shadow ${theme.transition.fast};
 
         &:hover,
         &:focus {

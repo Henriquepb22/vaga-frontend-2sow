@@ -12,7 +12,7 @@ export const LoginBox = styled.div`
         background-color: ${theme.colors.white};
         max-width: 55rem;
         margin: 0 auto;
-        border-radius: 10px;
+        border-radius: ${theme.radius.medium};
     `}
 `
 

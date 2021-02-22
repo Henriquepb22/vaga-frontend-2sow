@@ -19,7 +19,7 @@ export const InputWrapper = styled.div`
         display: flex;
         margin-top: ${theme.spacings.xxsmall};
         border: 2px solid ${theme.colors.lightGrey};
-        border-radius: 10px;
+        border-radius: ${theme.radius.large};
         background: ${theme.colors.white};
 
         &:focus-within {
@@ -47,6 +47,8 @@ export const Input = styled.input<Pick<InputProps, 'inputSize'>>`
         outline: none;
         width: 100%;
         color: ${theme.colors.black};
+        border-top-right-radius: ${theme.radius.large};
+        border-bottom-right-radius: ${theme.radius.large};
 
         &::placeholder {
             color: ${theme.colors.secondary};

@@ -49,11 +49,11 @@ export const TableBody = styled.tbody`
 
         > * {
             border: 1px solid ${theme.colors.grey};
-            border-radius: 8px;
+            border-radius: ${theme.radius.medium};
             background-color: ${theme.colors.white};
             margin: ${theme.spacings.large} 0;
             box-shadow: 3px 3px 0.6rem ${theme.colors.grey};
-            transition: box-shadow 0.2s ease-in;
+            transition: box-shadow ${theme.transition.fast};
 
             &:hover,
             &:focus-within {
