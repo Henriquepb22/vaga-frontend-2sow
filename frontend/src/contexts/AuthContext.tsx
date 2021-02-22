@@ -35,12 +35,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const handleLogin = async (email: string, password: string) => {
         try {
-            const data = await login(email, password)
+            const data = await login(email)
             if (data.length) {
-                const token = generateToken(data[0].id.toString())
-                setAuthenticated(true)
+                const token = generateToken(data[0].id.toString() + password)
                 setToken(token)
                 toast.success('Conectado')
+                setAuthenticated(true)
             } else {
                 toast.error('Email e/ou senha incorretos')
             }

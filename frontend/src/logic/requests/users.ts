@@ -1,4 +1,4 @@
-import { UserProps, UserFilters } from 'types/users'
+import { UserProps, UserFilters, UserReturn } from 'types/users'
 import { REQUESTS } from 'logic/constants'
 import api from 'logic/api'
 
@@ -10,7 +10,7 @@ export const insertUser = async (user: UserProps) => {
     return data
 }
 
-export const getUsers = async (filters: UserFilters): Promise<UserProps[]> => {
+export const getUsers = async (filters: UserFilters): Promise<UserReturn[]> => {
     const { page, name, order, sortBy } = filters
     const { data } = await api.get('/users', {
         params: {

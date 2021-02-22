@@ -14,7 +14,7 @@ const wrapperModifiers = {
     `,
 
     normal: (theme: DefaultTheme) => css`
-        height: 3rem;
+        height: 3.2rem;
         font-size: ${theme.font.sizes.medium};
     `,
 
@@ -29,10 +29,10 @@ const wrapperModifiers = {
         &::after {
             content: '';
             margin-left: ${theme.spacings.xsmall};
-            width: 2rem;
-            height: 2rem;
+            width: 1.4rem;
+            height: 1.4rem;
             border-radius: 50%;
-            border: 4px solid ${theme.colors.lightGrey};
+            border: 3px solid ${theme.colors.lightGrey};
             animation: spinner 0.7s linear infinite;
             border-bottom-color: ${theme.colors.lightBlue};
 

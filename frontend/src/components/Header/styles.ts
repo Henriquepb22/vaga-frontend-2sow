@@ -54,5 +54,9 @@ export const NavLink = styled(BaseNavLink)`
             margin-left: ${theme.spacings.xsmall};
             width: 2rem;
         }
+
+        ${media.lessThan('medium')`
+        padding: ${theme.spacings.xsmall};
+    `}
     `}
 `
