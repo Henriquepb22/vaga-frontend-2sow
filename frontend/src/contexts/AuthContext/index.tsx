@@ -3,7 +3,7 @@ import { login } from 'logic/requests/auth'
 import { toast } from 'react-toastify'
 import crypto from 'crypto'
 
-type AuthContextProps = {
+export type AuthContextProps = {
     token: string | null
     authenticated: boolean
     handleLogin: (email: string, password: string) => Promise<void>

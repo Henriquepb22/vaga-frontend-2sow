@@ -9,7 +9,7 @@ describe('<Button />', () => {
         renderWithTheme(<Button>Login</Button>)
 
         expect(screen.getByRole('button', { name: /login/i })).toHaveStyle({
-            height: '3rem',
+            height: '3.2rem',
             fontSize: '1.6rem',
             backgroundColor: '#267FFF'
         })

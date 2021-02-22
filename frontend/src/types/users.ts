@@ -15,6 +15,11 @@ export type UserReturn = UserProps & {
     id: number
 }
 
+export type UsersReturn = {
+    data: UserReturn[]
+    total: number
+}
+
 export type UserFilters = {
     page: number
     name?: string

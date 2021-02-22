@@ -8,7 +8,8 @@ export default {
         lightGrey: '#F4F8FF',
         grey: '#D1DEE8',
         darkGrey: '#818181',
-        danger: '#FF5540',
+        danger: '#E74C3C',
+        green: '#21BA45',
         black: '#030517'
     },
     font: {

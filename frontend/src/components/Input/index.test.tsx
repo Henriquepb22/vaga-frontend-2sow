@@ -7,10 +7,15 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import Input from '.'
 
 describe('<Input />', () => {
-    it('should render input with label', () => {
+    it('should render input with label and normal size', () => {
         renderWithTheme(<Input label="Label" labelFor="Label" id="Label" />)
 
-        expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
+        const input = screen.getByLabelText(/label/i)
+
+        expect(input).toBeInTheDocument()
+        expect(input).toHaveStyle({
+            padding: '1rem'
+        })
     })
 
     it('should render input without label', () => {
@@ -60,5 +65,23 @@ describe('<Input />', () => {
         expect(
             screen.getByText(/ops... something bad happened/i)
         ).toBeInTheDocument()
+    })
+
+    it('should render input on large size', () => {
+        renderWithTheme(
+            <Input
+                label="Label"
+                labelFor="Label"
+                id="Label"
+                inputSize="large"
+            />
+        )
+
+        const input = screen.getByLabelText(/label/i)
+
+        expect(input).toBeInTheDocument()
+        expect(input).toHaveStyle({
+            padding: '1.6rem'
+        })
     })
 })

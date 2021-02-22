@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
+import { spin } from 'utils/styles/animations'
 
 import { ButtonProps } from '.'
 
@@ -33,17 +34,8 @@ const wrapperModifiers = {
             height: 1.4rem;
             border-radius: 50%;
             border: 3px solid ${theme.colors.lightGrey};
-            animation: spinner 0.7s linear infinite;
+            animation: ${spin} 0.7s linear infinite;
             border-bottom-color: ${theme.colors.lightBlue};
-
-            @keyframes spinner {
-                0% {
-                    transform: rotate(0deg);
-                }
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
         }
     `
 }

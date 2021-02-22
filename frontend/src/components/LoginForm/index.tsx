@@ -60,9 +60,10 @@ const LoginForm = () => {
                 <S.FormContainer onSubmit={onSubmit} role="form">
                     <Input
                         name="email"
-                        placeholder="Digite seu email"
                         error={getEmailError()}
                         autoComplete="email"
+                        placeholder="Digite seu email"
+                        inputSize="large"
                         icon={<Email />}
                         ref={register({
                             required: true,
@@ -77,6 +78,7 @@ const LoginForm = () => {
                         error={getPasswordError()}
                         autoComplete="current-password"
                         placeholder="Digite sua senha"
+                        inputSize="large"
                         icon={<Lock />}
                         ref={register({ required: true, minLength: 5 })}
                         disabled={loading}

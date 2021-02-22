@@ -1,4 +1,4 @@
-import { UserProps, UserFilters, UserReturn } from 'types/users'
+import { UserProps, UserFilters, UsersReturn } from 'types/users'
 import { REQUESTS } from 'logic/constants'
 import api from 'logic/api'
 
@@ -10,9 +10,9 @@ export const insertUser = async (user: UserProps) => {
     return data
 }
 
-export const getUsers = async (filters: UserFilters): Promise<UserReturn[]> => {
+export const getUsers = async (filters: UserFilters): Promise<UsersReturn> => {
     const { page, name, order, sortBy } = filters
-    const { data } = await api.get('/users', {
+    const { data, headers } = await api.get('/users', {
         params: {
             _page: page,
             _limit: REQUESTS.PAGE_LIMIT,
@@ -22,7 +22,10 @@ export const getUsers = async (filters: UserFilters): Promise<UserReturn[]> => {
         }
     })
 
-    return data
+    return {
+        data,
+        total: Number(headers['x-total-count'])
+    }
 }
 
 export const getUser = async (id: number): Promise<UserProps> => {
