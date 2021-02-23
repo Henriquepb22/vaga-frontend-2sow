@@ -21,6 +21,7 @@ export const Header = styled.header`
 
 export const Title = styled.h1`
     ${({ theme }) => css`
+        cursor: default;
         color: ${theme.colors.white};
         font-size: ${theme.font.sizes.xxlarge};
         font-weight: ${theme.font.bold};
@@ -58,6 +59,11 @@ export const NavLink = styled(BaseNavLink)`
         ${media.lessThan('medium')`
             padding: ${theme.spacings.xsmall};
             font-size: 0;
+
+            > svg {
+                margin-left: 0;
+                width: 2.4rem;
+            }
         `}
     `}
 `

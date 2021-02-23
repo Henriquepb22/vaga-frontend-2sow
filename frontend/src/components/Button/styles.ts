@@ -46,11 +46,11 @@ export const Wrapper = styled.button<WrapperProps>`
         align-items: center;
         justify-content: center;
         border-radius: ${theme.radius.medium};
-        width: 100%;
         border: 0;
         color: ${theme.colors.white};
         font-weight: ${theme.font.bold};
         transition: box-shadow ${theme.transition.fast};
+        padding: ${theme.spacings.xsmall} ${theme.spacings.large};
 
         &:hover,
         &:focus {

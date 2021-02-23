@@ -4,13 +4,14 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import Users from '.'
 
 describe('<Users />', () => {
-    it('should render page title, filter input and table', () => {
+    it('should render users page', () => {
         renderWithTheme(<Users />)
 
         expect(
             screen.getByRole('heading', { name: /usuários/i })
         ).toBeInTheDocument()
-        expect(screen.getByRole('table')).toBeInTheDocument()
-        expect(screen.getByLabelText(/buscar/i)).toBeInTheDocument()
+        expect(
+            screen.getByPlaceholderText(/digite o nome/i)
+        ).toBeInTheDocument()
     })
 })

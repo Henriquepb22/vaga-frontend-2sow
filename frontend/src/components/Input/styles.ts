@@ -1,15 +1,17 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import { spin } from 'utils/styles/animations'
+import media from 'styled-media-query'
 
+import { spin } from 'utils/styles/animations'
 import { InputProps } from '.'
 
-type WrapperProps = Pick<InputProps, 'isLoading'> & {
+type WrapperProps = Pick<InputProps, 'isLoading' | 'inputSize'> & {
     error: boolean
 }
 
 export const Label = styled.label`
     ${({ theme }) => css`
-        font-size: ${theme.font.sizes.small};
+        color: ${theme.colors.secondary};
+        font-weight: ${theme.font.bold};
         cursor: pointer;
     `}
 `
@@ -33,10 +35,14 @@ const inputModifiers = {
         padding: ${theme.spacings.small};
         font-size: ${theme.font.sizes.small};
     `,
-
     large: (theme: DefaultTheme) => css`
         padding: ${theme.spacings.large};
         font-size: ${theme.font.sizes.medium};
+
+        ${media.lessThan('medium')`
+            padding: ${theme.spacings.small};
+            font-size: ${theme.font.sizes.small};
+        `}
     `
 }
 
@@ -65,6 +71,7 @@ export const Icon = styled.div`
         color: ${theme.colors.primary};
         width: 2rem;
         margin-left: ${theme.spacings.medium};
+
         & > svg {
             width: 100%;
         }
@@ -80,6 +87,19 @@ export const Error = styled.p`
 `
 
 const wrapperModifiers = {
+    normal: (theme: DefaultTheme) => css`
+        ${Label} {
+            font-size: ${theme.font.sizes.medium};
+        }
+    `,
+    large: (theme: DefaultTheme) => css`
+        ${Label} {
+            font-size: ${theme.font.sizes.large};
+            ${media.lessThan('medium')`
+                font-size: ${theme.font.sizes.medium};
+            `}
+        }
+    `,
     error: (theme: DefaultTheme) => css`
         ${InputWrapper} {
             border-color: ${theme.colors.danger};
@@ -95,6 +115,7 @@ const wrapperModifiers = {
             & > svg {
                 display: none;
             }
+
             &::after {
                 content: '';
                 width: 1.1rem;
@@ -109,7 +130,8 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-    ${({ theme, error, isLoading }) => css`
+    ${({ theme, error, isLoading, inputSize }) => css`
+        ${!!inputSize && wrapperModifiers[inputSize](theme)}
         ${isLoading && wrapperModifiers.isLoading(theme)}
         ${!!error && wrapperModifiers.error(theme)};
     `}

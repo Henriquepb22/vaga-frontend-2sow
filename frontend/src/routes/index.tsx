@@ -5,6 +5,7 @@ import { ROUTES } from 'logic/constants'
 import Logout from 'pages/Logout'
 import Login from 'pages/Login'
 import Users from 'pages/Users'
+import User from 'pages/User'
 
 const Routes = () => {
     const { authenticated } = useContext(AuthContext)
@@ -20,6 +21,9 @@ const Routes = () => {
             {!authenticated && <Redirect to={ROUTES.LOGIN} />}
             <Route path={ROUTES.USERS} exact>
                 <Users />
+            </Route>
+            <Route path={ROUTES.USER} exact>
+                <User />
             </Route>
             <Route path={ROUTES.LOGOUT} exact>
                 <Logout />

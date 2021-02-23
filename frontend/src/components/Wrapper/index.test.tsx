@@ -21,7 +21,8 @@ describe('<Wrapper />', () => {
         const value: AuthContextProps = {
             authenticated: true,
             token: 'ASD123ASD',
-            handleLogin: jest.fn()
+            handleLogin: jest.fn(),
+            handleLogout: jest.fn()
         }
 
         renderWithTheme(
@@ -35,6 +36,6 @@ describe('<Wrapper />', () => {
         )
 
         expect(screen.getByRole('navigation')).toBeInTheDocument()
-        expect(screen.getByRole('navigation').childNodes).toHaveLength(2)
+        expect(screen.getByRole('navigation').childNodes).toHaveLength(3)
     })
 })

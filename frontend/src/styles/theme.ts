@@ -37,7 +37,8 @@ export default {
     },
     radius: {
         medium: '0.8rem',
-        large: '1rem'
+        large: '1rem',
+        xlarge: '1.8rem'
     },
     transition: {
         fast: '0.3s ease-in'

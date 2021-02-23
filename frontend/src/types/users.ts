@@ -5,7 +5,7 @@ export type UserProps = {
     address: {
         zipcode: number
         street: string
-        number: number
+        number: string
         district: string
         city: string
     }

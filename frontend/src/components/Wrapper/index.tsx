@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect, useCallback } from 'react'
+import { AddCircleOutline } from '@styled-icons/material/AddCircleOutline'
 import Header, { NavLinkProps } from 'components/Header'
 import { Logout } from '@styled-icons/material/Logout'
 import { Group } from '@styled-icons/material/Group'
@@ -17,6 +18,11 @@ const Wrapper = ({ children }: WrapperProps) => {
 
     const getHeaderLinks = useCallback(() => {
         const links = [
+            {
+                label: 'Novo usuário',
+                linkTo: ROUTES.USER,
+                icon: <AddCircleOutline />
+            },
             {
                 label: 'Usuários',
                 linkTo: ROUTES.USERS,

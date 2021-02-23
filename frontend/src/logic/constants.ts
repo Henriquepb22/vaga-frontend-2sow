@@ -1,6 +1,7 @@
 export const ROUTES = {
     LOGIN: '/login',
     USERS: '/users',
+    USER: '/user',
     LOGOUT: '/logout'
 }
 
@@ -9,5 +10,6 @@ export const REQUESTS = {
 }
 
 export const REGEX = {
-    EMAIL_REGEX: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    EMAIL: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+    ZIPCODE: /^\d{5}-\d{3}$/
 }

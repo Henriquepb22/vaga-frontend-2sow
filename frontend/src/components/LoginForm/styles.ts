@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
-export const Wrapper = styled.main``
-
 export const LoginBox = styled.div`
     ${({ theme }) => css`
         display: flex;

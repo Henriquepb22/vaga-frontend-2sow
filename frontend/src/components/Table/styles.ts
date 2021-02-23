@@ -27,8 +27,8 @@ export const TableHeader = styled.thead`
 
 export const TableHeaderData = styled.th`
     ${({ theme }) => css`
-        text-align: left;
-        padding: 0 ${theme.spacings.medium};
+        text-align: center;
+        padding: 0 ${theme.spacings.small};
     `}
 `
 
@@ -65,7 +65,8 @@ export const TableBody = styled.tbody`
 
 export const TableData = styled.td`
     ${({ theme }) => css`
-        padding: ${theme.spacings.large};
+        padding: ${theme.spacings.medium} ${theme.spacings.small};
+        text-align: center;
 
         ${media.lessThan('medium')`
             padding: ${theme.spacings.xsmall};

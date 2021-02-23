@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { RemoveCircleOutline } from '@styled-icons/material-outlined/RemoveCircleOutline'
+import { ExpandMore } from '@styled-icons/material-outlined/ExpandMore'
 import { Search } from '@styled-icons/material-outlined/Search'
 import { Edit } from '@styled-icons/material-outlined/Edit'
 import { PageTitle } from 'components/PageTitle/styles'
@@ -118,25 +119,23 @@ const Users = () => {
             <S.FiltersContainer>
                 <Input
                     icon={<Search />}
-                    label="Buscar"
-                    labelFor="search"
                     id="search"
                     placeholder="Digite o nome do usuário"
                     onKeyDown={handleFilter}
                     isLoading={loading}
+                    inputSize="large"
                 />
             </S.FiltersContainer>
-            <Table columns={columns} body={tableBody} />
+            {!!users.length && <Table columns={columns} body={tableBody} />}
             {totalUsers !== users.length && (
-                <S.ButtonContainer>
-                    <Button
-                        onClick={loadMore}
-                        isLoading={loading}
-                        color="secondary"
-                    >
-                        Carregar mais
-                    </Button>
-                </S.ButtonContainer>
+                <Button
+                    onClick={loadMore}
+                    isLoading={loading}
+                    color="secondary"
+                    icon={<ExpandMore />}
+                >
+                    Carregar mais
+                </Button>
             )}
         </S.Container>
     )

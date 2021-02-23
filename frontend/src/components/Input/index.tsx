@@ -24,7 +24,7 @@ const InputComponent = forwardRef<HTMLInputElement, InputProps>(function Input(
     ref
 ) {
     return (
-        <S.Wrapper error={!!error} isLoading={isLoading}>
+        <S.Wrapper error={!!error} isLoading={isLoading} inputSize={inputSize}>
             {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
             <S.InputWrapper>
                 {!!icon && <S.Icon>{icon}</S.Icon>}
