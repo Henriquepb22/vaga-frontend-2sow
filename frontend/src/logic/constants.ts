@@ -2,6 +2,7 @@ export const ROUTES = {
     LOGIN: '/login',
     USERS: '/users',
     USER: '/user',
+    EDIT_USER: '/user/:id',
     LOGOUT: '/logout'
 }
 

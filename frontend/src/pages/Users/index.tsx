@@ -6,6 +6,8 @@ import { Edit } from '@styled-icons/material-outlined/Edit'
 import { PageTitle } from 'components/PageTitle/styles'
 import { UserFilters, UserReturn } from 'types/users'
 import { getUsers } from 'logic/requests/users'
+import { ROUTES } from 'logic/constants'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from 'components/Button'
 import Table from 'components/Table'
@@ -82,12 +84,14 @@ const Users = () => {
                         email,
                         city,
                         <S.TableButtons key={id}>
-                            <S.EditButton
-                                type="button"
-                                title="Editar"
-                                aria-label="Editar"
-                                icon={<Edit />}
-                            />
+                            <Link to={ROUTES.EDIT_USER.replace(':id', `${id}`)}>
+                                <S.EditButton
+                                    type="button"
+                                    title="Editar"
+                                    aria-label="Editar"
+                                    icon={<Edit />}
+                                />
+                            </Link>
                             <S.RemoveButton
                                 type="button"
                                 color="secondary"

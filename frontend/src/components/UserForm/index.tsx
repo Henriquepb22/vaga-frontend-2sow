@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import {
     getAddressNumberErrors,
     getDocumentErrors,
@@ -11,9 +11,9 @@ import {
 } from 'logic/validations'
 import { getAddressByZipCode } from 'logic/requests/zipcode'
 import { Save } from '@styled-icons/material-outlined/Save'
+import { getUser, insertUser, updateUser } from 'logic/requests/users'
 import { documentMask, zipCodeMask } from 'logic/masks'
 import { PageTitle } from 'components/PageTitle/styles'
-import { insertUser } from 'logic/requests/users'
 import { REGEX, ROUTES } from 'logic/constants'
 import { useForm } from 'react-hook-form'
 import { Redirect } from 'react-router'
@@ -24,17 +24,54 @@ import Input from 'components/Input'
 
 import * as S from './styles'
 
-const UserForm = () => {
-    const { register, handleSubmit, errors, setValue } = useForm<UserProps>()
+type UserFormProps = {
+    userId?: string
+}
+
+const UserForm = ({ userId }: UserFormProps) => {
+    const {
+        register,
+        handleSubmit,
+        errors,
+        setValue,
+        reset
+    } = useForm<UserProps>()
     const [loading, setLoading] = useState(false)
     const [redirect, setRedirect] = useState(false)
     const numberRef = useRef<HTMLInputElement | null>(null)
+    const zipCodeRef = useRef<HTMLInputElement | null>(null)
+
+    const fetchUser = useCallback(async () => {
+        if (userId) {
+            setLoading(true)
+            try {
+                const user = await getUser(+userId)
+                reset({
+                    ...user
+                })
+            } catch (error) {
+                toast.error(error.response?.data.message || error)
+            }
+            setLoading(false)
+        } else {
+            reset({})
+        }
+    }, [userId, reset])
+
+    useEffect(() => {
+        fetchUser()
+    }, [fetchUser])
 
     const onSubmit = handleSubmit(async (values) => {
         setLoading(true)
         try {
-            await insertUser(values)
-            toast.success('Usuário adicionado com sucesso!')
+            if (userId) {
+                await updateUser(+userId, values)
+                toast.success('Usuário atualizado com sucesso!')
+            } else {
+                await insertUser(values)
+                toast.success('Usuário adicionado com sucesso!')
+            }
             setRedirect(true)
         } catch (error) {
             setLoading(false)
@@ -48,13 +85,19 @@ const UserForm = () => {
             const {
                 bairro,
                 logradouro,
-                localidade
+                localidade,
+                erro
             } = await getAddressByZipCode(zipCode)
-            if (bairro) setValue('address.district', bairro)
-            if (localidade) setValue('address.city', localidade)
-            if (logradouro) setValue('address.street', logradouro)
             setLoading(false)
-            if (numberRef.current) numberRef.current.focus()
+            if (erro) {
+                if (zipCodeRef.current) zipCodeRef.current.focus()
+                toast.error('CEP não encontrado.')
+            } else {
+                if (bairro) setValue('address.district', bairro)
+                if (localidade) setValue('address.city', localidade)
+                if (logradouro) setValue('address.street', logradouro)
+                if (numberRef.current) numberRef.current.focus()
+            }
         } catch (error) {
             toast.error(error.response?.data.message || error)
             setLoading(false)
@@ -63,7 +106,7 @@ const UserForm = () => {
 
     return (
         <S.FormBox onSubmit={onSubmit} aria-label="form">
-            <PageTitle>Novo usuário</PageTitle>
+            <PageTitle>{userId ? 'Editar usuário' : 'Novo usuário'}</PageTitle>
             <S.Row>
                 <Input
                     id="name"
@@ -114,7 +157,13 @@ const UserForm = () => {
                     labelFor="address.zipcode"
                     disabled={loading}
                     error={getZipcodeErrors(errors.address?.zipcode?.type)}
-                    ref={register({ required: true, pattern: REGEX.ZIPCODE })}
+                    ref={(ref) => {
+                        register(ref, {
+                            required: true,
+                            pattern: REGEX.ZIPCODE
+                        })
+                        zipCodeRef.current = ref
+                    }}
                     maxLength={9}
                     onChange={(e) => {
                         setValue(
@@ -179,7 +228,7 @@ const UserForm = () => {
             </S.Row>
             <S.ButtonContainer>
                 <Button color="primary" isLoading={loading} icon={<Save />}>
-                    Adicionar
+                    {userId ? 'Salvar' : 'Adicionar'}
                 </Button>
             </S.ButtonContainer>
             {!!redirect && <Redirect to={ROUTES.USERS} />}

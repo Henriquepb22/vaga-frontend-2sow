@@ -9,4 +9,5 @@ export type ZipCodeProps = {
     gia: string
     ddd: string
     siafi: string
+    erro?: boolean
 }

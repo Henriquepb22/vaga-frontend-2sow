@@ -25,6 +25,9 @@ const Routes = () => {
             <Route path={ROUTES.USER} exact>
                 <User />
             </Route>
+            <Route path={ROUTES.EDIT_USER} exact>
+                <User />
+            </Route>
             <Route path={ROUTES.LOGOUT} exact>
                 <Logout />
             </Route>
