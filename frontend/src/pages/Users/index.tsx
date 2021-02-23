@@ -2,10 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { RemoveCircleOutline } from '@styled-icons/material-outlined/RemoveCircleOutline'
 import { ExpandMore } from '@styled-icons/material-outlined/ExpandMore'
 import { Search } from '@styled-icons/material-outlined/Search'
+import { deleteUser, getUsers } from 'logic/requests/users'
 import { Edit } from '@styled-icons/material-outlined/Edit'
 import { PageTitle } from 'components/PageTitle/styles'
 import { UserFilters, UserReturn } from 'types/users'
-import { getUsers } from 'logic/requests/users'
 import { ROUTES } from 'logic/constants'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -55,6 +55,20 @@ const Users = () => {
             }
         })
 
+    const handleDelete = useCallback(
+        async (id: number) => {
+            setLoading(true)
+            try {
+                await deleteUser(id)
+                toast.info('Usuário removido com sucesso.')
+                fetch()
+            } catch (error) {
+                toast.error(error.response?.data.message || error)
+            }
+        },
+        [fetch]
+    )
+
     const columns = [
         {
             title: 'Nome'
@@ -93,10 +107,11 @@ const Users = () => {
                                 />
                             </Link>
                             <S.RemoveButton
+                                onClick={() => handleDelete(id)}
                                 type="button"
                                 color="secondary"
                                 title="Remover"
-                                aria-label="Editar"
+                                aria-label="Remover"
                                 icon={<RemoveCircleOutline />}
                             />
                         </S.TableButtons>
@@ -106,7 +121,7 @@ const Users = () => {
             }
         )
         return body
-    }, [users])
+    }, [users, handleDelete])
 
     const handleFilter = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
