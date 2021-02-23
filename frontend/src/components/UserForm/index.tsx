@@ -34,7 +34,8 @@ const UserForm = ({ userId }: UserFormProps) => {
         handleSubmit,
         errors,
         setValue,
-        reset
+        reset,
+        trigger
     } = useForm<UserProps>()
     const [loading, setLoading] = useState(false)
     const [redirect, setRedirect] = useState(false)
@@ -50,7 +51,8 @@ const UserForm = ({ userId }: UserFormProps) => {
                     ...user
                 })
             } catch (error) {
-                toast.error(error.response?.data.message || error)
+                toast.error(error.response?.data.message || Error)
+                setRedirect(true)
             }
             setLoading(false)
         } else {
@@ -93,9 +95,18 @@ const UserForm = ({ userId }: UserFormProps) => {
                 if (zipCodeRef.current) zipCodeRef.current.focus()
                 toast.error('CEP não encontrado.')
             } else {
-                if (bairro) setValue('address.district', bairro)
-                if (localidade) setValue('address.city', localidade)
-                if (logradouro) setValue('address.street', logradouro)
+                if (bairro) {
+                    setValue('address.district', bairro)
+                    trigger('address.district')
+                }
+                if (localidade) {
+                    setValue('address.city', localidade)
+                    trigger('address.city')
+                }
+                if (logradouro) {
+                    setValue('address.street', logradouro)
+                    trigger('address.street')
+                }
                 if (numberRef.current) numberRef.current.focus()
             }
         } catch (error) {

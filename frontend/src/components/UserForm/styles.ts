@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 import * as Input from 'components/Input/styles'
 
@@ -44,6 +45,19 @@ export const Row = styled.div`
         ${Input.Input} {
             border-radius: ${theme.spacings.large};
         }
+
+        ${media.lessThan('medium')`
+            flex-direction: column;
+
+            > *:not(:last-child) {
+                margin-right: 0;
+                margin-bottom: ${theme.spacings.medium};
+            }
+
+            ${Input.Wrapper} {
+            width: 100%;
+            }
+        `}
     `}
 `
 

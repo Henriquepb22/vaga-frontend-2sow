@@ -26,9 +26,9 @@ const LoginForm = () => {
         try {
             await handleLogin(email, password)
         } catch (error) {
-            setLoading(false)
             toast.error(error)
         }
+        setLoading(false)
     })
 
     return (

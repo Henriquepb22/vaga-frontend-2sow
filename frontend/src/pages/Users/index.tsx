@@ -64,6 +64,7 @@ const Users = () => {
                 fetch()
             } catch (error) {
                 toast.error(error.response?.data.message || error)
+                setLoading(false)
             }
         },
         [fetch]
