@@ -1,3 +1,17 @@
 {
-    "usuarios": []
+    "usuarios": [
+        {
+            "nome": "Jackson Souza",
+            "cpf": "149.128.900-73",
+            "email": "jacksonsouza@mail.com",
+            "endereco": {
+                "cep": "77001-576",
+                "rua": "Quadra 409 Norte Alameda 22",
+                "numero": "22",
+                "bairro": "Plano Diretor Norte",
+                "cidade": "Palmas"
+            },
+            "id": 1
+        }
+    ]
 }
