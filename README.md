@@ -11,6 +11,7 @@ Sistema de cadastro de usuários composto das seguintes páginas:
   - Redirecionado para esta página caso não esteja autenticado
   - Validação de e-mail e senha
   - **Para realizar login** basta digitar qualquer email cadastrado no backend e qualquer senha com mais de 4 caracteres
+  - Foi adicionado um usuário com o email: **jacksonsouza@mail.com** para facilitar o acesso
 
 **2. Tela de listagem:**
   - Exibe a lista de usuários cadastrados
