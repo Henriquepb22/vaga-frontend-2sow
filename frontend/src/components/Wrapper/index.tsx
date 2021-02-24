@@ -47,7 +47,7 @@ const Wrapper = ({ children }: WrapperProps) => {
 
     return (
         <S.Wrapper>
-            <Header title="Cadastro" links={navLinks} />
+            <Header title="2SOW - Uz" links={navLinks} />
             {children}
         </S.Wrapper>
     )

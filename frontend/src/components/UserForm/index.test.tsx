@@ -93,6 +93,23 @@ describe('<UserForm />', () => {
         })
     })
 
+    it('should validate document input', async () => {
+        renderWithTheme(<UserForm />)
+
+        const submitButton = screen.getByRole('button', { name: /adicionar/i })
+        const documentInput = screen.getByPlaceholderText(
+            /ex.: 000.000.000-00/i
+        )
+        const text = '111111'
+
+        userEvent.type(documentInput, text)
+        userEvent.click(submitButton)
+
+        await waitFor(() => {
+            expect(screen.getByText(/cpf inválido/i)).toBeInTheDocument()
+        })
+    })
+
     it('should validate name size', async () => {
         renderWithTheme(<UserForm />)
 

@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
+import * as Button from 'components/Button/styles'
+
 export const LoginBox = styled.div`
     ${({ theme }) => css`
         display: flex;
@@ -28,6 +30,10 @@ export const LoginInfo = styled.h3`
         font-size: ${theme.font.sizes.medium};
         color: ${theme.colors.lightBlue};
         font-weight: ${theme.font.normal};
+
+        ${media.lessThan('medium')`
+            text-align: center;
+        `}
     `}
 `
 
@@ -45,6 +51,11 @@ export const FormContainer = styled.form`
 
         ${media.lessThan('medium')`
             padding: 0;
+
+            ${Button.Wrapper} {
+                height: 3.6rem;
+                font-size: ${theme.font.sizes.medium};
+            } 
         `}
     `}
 `

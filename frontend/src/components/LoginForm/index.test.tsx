@@ -1,3 +1,4 @@
+import { AuthContext, AuthContextProps } from 'contexts/AuthContext'
 import { screen, waitFor } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 import userEvent from '@testing-library/user-event'
@@ -84,6 +85,35 @@ describe('<LoginForm />', () => {
 
             expect(emailError).toBeInTheDocument()
             expect(passwordError).toBeInTheDocument()
+        })
+    })
+
+    it('should submit form with email and password', async () => {
+        const value: AuthContextProps = {
+            authenticated: false,
+            token: null,
+            handleLogin: jest.fn(),
+            handleLogout: jest.fn()
+        }
+
+        renderWithTheme(
+            <AuthContext.Provider value={value}>
+                <LoginForm />
+            </AuthContext.Provider>
+        )
+
+        const submitButton = screen.getByRole('button', { name: /entrar/i })
+        const emailInput = screen.getByPlaceholderText(/digite seu email/i)
+        const email = 'email@mail.com'
+        userEvent.type(emailInput, email)
+
+        const passwordInput = screen.getByPlaceholderText(/digite sua senha/i)
+        const password = '123654'
+        userEvent.type(passwordInput, password)
+
+        userEvent.click(submitButton)
+        await waitFor(() => {
+            expect(value.handleLogin).toHaveBeenCalledWith(email, password)
         })
     })
 })

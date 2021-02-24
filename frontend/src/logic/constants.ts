@@ -12,5 +12,6 @@ export const REQUESTS = {
 
 export const REGEX = {
     EMAIL: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-    ZIPCODE: /^\d{5}-\d{3}$/
+    ZIPCODE: /^\d{5}-\d{3}$/,
+    DOCUMENT: /^\d{3}\.\d{3}\.\d{3}-\d{2}/
 }

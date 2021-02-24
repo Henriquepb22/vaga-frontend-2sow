@@ -2,7 +2,7 @@ import { UserReturn } from 'types/users'
 import api from 'logic/api'
 
 export const login = async (email: string): Promise<UserReturn[]> => {
-    const { data } = await api.get('/users', {
+    const { data } = await api.get('/usuarios', {
         params: {
             email,
             _limit: 1

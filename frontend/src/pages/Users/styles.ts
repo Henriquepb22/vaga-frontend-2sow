@@ -53,3 +53,12 @@ export const EditButton = styled(Button)`
         }
     `}
 `
+
+export const NoUsersMessage = styled.p`
+    ${({ theme }) => css`
+        display: flex;
+        margin: ${theme.spacings.medium} auto 0;
+        font-size: ${theme.font.sizes.large};
+        color: ${theme.colors.black};
+    `}
+`

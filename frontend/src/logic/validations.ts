@@ -34,6 +34,9 @@ export const getDocumentErrors = (type?: FieldError['type']) => {
     if (type === 'required') {
         return 'CPF obrigatório'
     }
+    if (type === 'pattern') {
+        return 'CPF inválido'
+    }
     return ''
 }
 

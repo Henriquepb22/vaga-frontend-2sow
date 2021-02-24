@@ -1,13 +1,13 @@
 export type UserProps = {
-    name: string
-    document: string
+    nome: string
+    cpf: string
     email: string
-    address: {
-        zipcode: number
-        street: string
-        number: string
-        district: string
-        city: string
+    endereco: {
+        cep: number
+        rua: string
+        numero: string
+        bairro: string
+        cidade: string
     }
 }
 
@@ -22,7 +22,7 @@ export type UsersReturn = {
 
 export type UserFilters = {
     page: number
-    name?: string
+    nome?: string
     sortBy: string
     order: 'asc' | 'desc'
 }

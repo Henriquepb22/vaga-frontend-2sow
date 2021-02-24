@@ -9,9 +9,9 @@ import {
     getStreetErrors,
     getZipcodeErrors
 } from 'logic/validations'
+import { getUser, insertUser, updateUser } from 'logic/requests/users'
 import { getAddressByZipCode } from 'logic/requests/zipcode'
 import { Save } from '@styled-icons/material-outlined/Save'
-import { getUser, insertUser, updateUser } from 'logic/requests/users'
 import { documentMask, zipCodeMask } from 'logic/masks'
 import { PageTitle } from 'components/PageTitle/styles'
 import { REGEX, ROUTES } from 'logic/constants'
@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form'
 import { Redirect } from 'react-router'
 import { UserProps } from 'types/users'
 import { toast } from 'react-toastify'
+import { signal } from 'logic/api'
 import Button from 'components/Button'
 import Input from 'components/Input'
 
@@ -64,6 +65,10 @@ const UserForm = ({ userId }: UserFormProps) => {
         fetchUser()
     }, [fetchUser])
 
+    useEffect(() => {
+        return () => signal.cancel('component unmounted')
+    }, [])
+
     const onSubmit = handleSubmit(async (values) => {
         setLoading(true)
         try {
@@ -96,16 +101,16 @@ const UserForm = ({ userId }: UserFormProps) => {
                 toast.error('CEP não encontrado.')
             } else {
                 if (bairro) {
-                    setValue('address.district', bairro)
-                    trigger('address.district')
+                    setValue('endereco.bairro', bairro)
+                    trigger('endereco.bairro')
                 }
                 if (localidade) {
-                    setValue('address.city', localidade)
-                    trigger('address.city')
+                    setValue('endereco.cidade', localidade)
+                    trigger('endereco.cidade')
                 }
                 if (logradouro) {
-                    setValue('address.street', logradouro)
-                    trigger('address.street')
+                    setValue('endereco.rua', logradouro)
+                    trigger('endereco.rua')
                 }
                 if (numberRef.current) numberRef.current.focus()
             }
@@ -120,29 +125,26 @@ const UserForm = ({ userId }: UserFormProps) => {
             <PageTitle>{userId ? 'Editar usuário' : 'Novo usuário'}</PageTitle>
             <S.Row>
                 <Input
-                    id="name"
-                    name="name"
-                    labelFor="name"
+                    id="nome"
+                    name="nome"
+                    labelFor="nome"
                     disabled={loading}
-                    error={getNameErrors(errors.name?.type)}
+                    error={getNameErrors(errors.nome?.type)}
                     ref={register({ required: true, minLength: 4 })}
                     placeholder="Ex.: Fabiano Gomes"
                     label="Nome:"
                 />
                 <Input
-                    id="document"
-                    name="document"
-                    labelFor="document"
+                    id="cpf"
+                    name="cpf"
+                    labelFor="cpf"
                     disabled={loading}
-                    error={getDocumentErrors(errors.document?.type)}
+                    error={getDocumentErrors(errors.cpf?.type)}
                     maxLength={14}
                     onChange={(e) =>
-                        setValue(
-                            'document',
-                            documentMask(e.currentTarget.value)
-                        )
+                        setValue('cpf', documentMask(e.currentTarget.value))
                     }
-                    ref={register({ required: true })}
+                    ref={register({ required: true, pattern: REGEX.DOCUMENT })}
                     placeholder="Ex.: 000.000.000-00"
                     label="CPF:"
                 />
@@ -163,11 +165,11 @@ const UserForm = ({ userId }: UserFormProps) => {
                     label="E-mail:"
                 />
                 <Input
-                    id="address.zipcode"
-                    name="address.zipcode"
-                    labelFor="address.zipcode"
+                    id="endereco.cep"
+                    name="endereco.cep"
+                    labelFor="endereco.cep"
                     disabled={loading}
-                    error={getZipcodeErrors(errors.address?.zipcode?.type)}
+                    error={getZipcodeErrors(errors.endereco?.cep?.type)}
                     ref={(ref) => {
                         register(ref, {
                             required: true,
@@ -178,7 +180,7 @@ const UserForm = ({ userId }: UserFormProps) => {
                     maxLength={9}
                     onChange={(e) => {
                         setValue(
-                            'address.zipcode',
+                            'endereco.cep',
                             zipCodeMask(e.currentTarget.value)
                         )
 
@@ -192,21 +194,23 @@ const UserForm = ({ userId }: UserFormProps) => {
             </S.Row>
             <S.Row>
                 <Input
-                    id="address.street"
-                    name="address.street"
-                    labelFor="address.street"
+                    id="endereco.rua"
+                    name="endereco.rua"
+                    labelFor="endereco.rua"
                     disabled={loading}
-                    error={getStreetErrors(errors.address?.street?.type)}
+                    error={getStreetErrors(errors.endereco?.rua?.type)}
                     ref={register({ required: true })}
                     placeholder="Ex.: Rua Lauro Souza"
                     label="Rua:"
                 />
                 <Input
-                    id="address.number"
-                    name="address.number"
-                    labelFor="address.number"
+                    id="endereco.numero"
+                    name="endereco.numero"
+                    labelFor="endereco.numero"
                     disabled={loading}
-                    error={getAddressNumberErrors(errors.address?.number?.type)}
+                    error={getAddressNumberErrors(
+                        errors.endereco?.numero?.type
+                    )}
                     ref={(ref) => {
                         register(ref, { required: true })
                         numberRef.current = ref
@@ -217,21 +221,21 @@ const UserForm = ({ userId }: UserFormProps) => {
             </S.Row>
             <S.Row>
                 <Input
-                    id="address.district"
-                    name="address.district"
-                    labelFor="address.district"
+                    id="endereco.bairro"
+                    name="endereco.bairro"
+                    labelFor="endereco.bairro"
                     disabled={loading}
-                    error={getDistrictErrors(errors.address?.district?.type)}
+                    error={getDistrictErrors(errors.endereco?.bairro?.type)}
                     ref={register({ required: true })}
                     placeholder="Ex.: Centro"
                     label="Bairro:"
                 />
                 <Input
-                    id="address.city"
-                    name="address.city"
-                    labelFor="address.city"
+                    id="endereco.cidade"
+                    name="endereco.cidade"
+                    labelFor="endereco.cidade"
                     disabled={loading}
-                    error={getCityErrors(errors.address?.city?.type)}
+                    error={getCityErrors(errors.endereco?.cidade?.type)}
                     ref={register({ required: true })}
                     placeholder="Ex.: Minas Gerais"
                     label="Cidade:"

@@ -26,6 +26,7 @@ const Users = () => {
     const [filters, setFilters] = useState<UserFilters>(baseFilters)
     const [loading, setLoading] = useState(false)
     const [totalUsers, setTotalUsers] = useState(0)
+    const noUsers = !users.length && !loading
 
     const fetch = useCallback(async () => {
         setLoading(true)
@@ -90,14 +91,14 @@ const Users = () => {
 
     const tableBody = useMemo(() => {
         const body = users.map(
-            ({ id, name, document, email, address: { city } }) => {
+            ({ id, nome, cpf, email, endereco: { cidade } }) => {
                 const row = {
                     id,
                     content: [
-                        name,
-                        document,
+                        nome,
+                        cpf,
                         email,
-                        city,
+                        cidade,
                         <S.TableButtons key={id}>
                             <Link to={ROUTES.EDIT_USER.replace(':id', `${id}`)}>
                                 <S.EditButton
@@ -128,7 +129,7 @@ const Users = () => {
         if (e.key === 'Enter') {
             setFilters({
                 ...baseFilters,
-                name: e.currentTarget.value
+                nome: e.currentTarget.value
             })
         }
     }
@@ -147,6 +148,11 @@ const Users = () => {
                 />
             </S.FiltersContainer>
             {!!users.length && <Table columns={columns} body={tableBody} />}
+            {noUsers && (
+                <S.NoUsersMessage>
+                    Nenhum usuário encontrado :(
+                </S.NoUsersMessage>
+            )}
             {totalUsers !== users.length && (
                 <Button
                     onClick={loadMore}

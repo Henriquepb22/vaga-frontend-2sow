@@ -3,7 +3,7 @@ import { REQUESTS } from 'logic/constants'
 import api from 'logic/api'
 
 export const insertUser = async (user: UserProps) => {
-    const { data } = await api.post('/users', {
+    const { data } = await api.post('/usuarios', {
         ...user
     })
 
@@ -11,14 +11,14 @@ export const insertUser = async (user: UserProps) => {
 }
 
 export const getUsers = async (filters: UserFilters): Promise<UsersReturn> => {
-    const { page, name, order, sortBy } = filters
-    const { data, headers } = await api.get('/users', {
+    const { page, nome, order, sortBy } = filters
+    const { data, headers } = await api.get('/usuarios', {
         params: {
             _page: page,
             _limit: REQUESTS.PAGE_LIMIT,
             _sort: sortBy,
             _order: order,
-            name_like: name
+            nome_like: nome
         }
     })
 
@@ -29,13 +29,13 @@ export const getUsers = async (filters: UserFilters): Promise<UsersReturn> => {
 }
 
 export const getUser = async (id: number): Promise<UserProps> => {
-    const { data } = await api.get(`/users/${id}`)
+    const { data } = await api.get(`/usuarios/${id}`)
 
     return data
 }
 
 export const updateUser = async (id: number, user: UserProps) => {
-    const { data } = await api.put(`/users/${id}`, {
+    const { data } = await api.put(`/usuarios/${id}`, {
         ...user
     })
 
@@ -43,7 +43,7 @@ export const updateUser = async (id: number, user: UserProps) => {
 }
 
 export const deleteUser = async (id: number) => {
-    const { data } = await api.delete(`/users/${id}`)
+    const { data } = await api.delete(`/usuarios/${id}`)
 
     return data
 }
